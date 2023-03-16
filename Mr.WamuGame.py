@@ -28,7 +28,7 @@ image = pygame.image.load("head.png").convert_alpha()
 apple_ticks = 0
 clock = pygame.time.Clock()
 Player1 = Player(320, 320)
-
+i = False 
 while running:
     #grid
     for i in range(width//64):
@@ -40,10 +40,10 @@ while running:
 
     Player1.spawn_in()
 
-
+    #print("hello")
 
     pygame.display.flip()
-
+    
 
 
 
