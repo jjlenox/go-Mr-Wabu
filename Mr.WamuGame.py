@@ -13,7 +13,7 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Go Mr. Wamu')
 screen.fill(background_color)
 
-
+#test
 running = True
 #center
 UP = 'up'
