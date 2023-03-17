@@ -21,10 +21,12 @@ class Particle:
         self.y = y
         self.size = size
         self.color = (0, 0, 255)
-        self.speed = 3
+        self.speed = 2
         self.angle = LEFT
+        self.NoDoubleClick = LEFT
         self.previous_angle = UP
         self.completed_path = False
+        
 
     def display(self):
         rect = pygame.Rect(self.x, self.y, self.size, self.size)
@@ -32,8 +34,17 @@ class Particle:
         pygame.draw.line(screen, (0,120,0), (self.x, self.y), (self.x+2, self.y+2), 5)
 
     def change_direction(self, string):
+        
+        if string == 'up':
+            NoDoubleClick = UP
+        elif string == 'down':
+            NoDoubleClick = DOWN
+        elif string == 'left':
+            NoDoubleClick = LEFT
+        elif string == 'right':
+            NoDoubleClick = RIGHT
         if self.completed_path == True:
-            if self.previous_angle != self.angle:
+            if self.previous_angle != self.angle and self.angle != NoDoubleClick:
                 self.previous_angle = self.angle
             if string == 'up':
                 self.angle = UP
@@ -53,6 +64,8 @@ class Particle:
         self.y -= math.cos(self.angle) * self.speed
 
     def movegrid(self):
+        print('x: ' + str(self.x))
+        print('y: ' + str(self.y))
         #up and down
         if (self.angle == UP or self.angle == DOWN) and self.x % 64 == 0:
             self.completed_path = True
@@ -62,9 +75,11 @@ class Particle:
             elif self.previous_angle == RIGHT:
                 if self.x % 64 != 0:
                     self.x += 64 - self.x % 64
+            else:
+                self.y -= math.cos(self.angle) * self.speed
         else:
-            self.completed_path = False
-            self.x += math.sin(self.angle) * self.speed
+            #self.completed_path = False #lose control
+            self.x += math.sin(self.previous_angle) * self.speed
         #left and right
         if (self.angle == LEFT or self.angle == RIGHT) and self.y % 64 == 0:
             self.completed_path = True
@@ -74,9 +89,11 @@ class Particle:
             elif self.previous_angle == DOWN:
                 if self.y % 64 != 0:
                     self.y += 64 - self.y % 64
+            else:
+                self.x += math.sin(self.angle) * self.speed 
         else:
-            self.completed_path = False
-            self.y -= math.cos(self.angle) * self.speed
+            #self.completed_path = False
+            self.y -= math.cos(self.previous_angle) * self.speed
                         
 
     
