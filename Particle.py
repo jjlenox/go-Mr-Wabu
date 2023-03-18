@@ -24,9 +24,12 @@ class Particle:
         self.speed = 2
         self.angle = LEFT
         self.NoDoubleClick = LEFT
+        self.NoOppisite = RIGHT
         self.previous_angle = UP
         self.completed_path = False
         
+    def get_preevious_angle(self):
+        return self.previous_angle
 
     def display(self):
         rect = pygame.Rect(self.x, self.y, self.size, self.size)
@@ -34,7 +37,15 @@ class Particle:
         pygame.draw.line(screen, (0,120,0), (self.x, self.y), (self.x+2, self.y+2), 5)
 
     def change_direction(self, string):
-        
+        if string == 'up':
+            NoOppisite = DOWN
+        elif string == 'down':
+            NoOppisite = UP
+        elif string == 'left':
+            NoOppisite = RIGHT
+        elif string == 'right':
+            NoOppisite = LEFT
+
         if string == 'up':
             NoDoubleClick = UP
         elif string == 'down':
@@ -43,8 +54,9 @@ class Particle:
             NoDoubleClick = LEFT
         elif string == 'right':
             NoDoubleClick = RIGHT
+
         if self.completed_path == True:
-            if self.previous_angle != self.angle and self.angle != NoDoubleClick:
+            if self.previous_angle != self.angle and self.angle != NoDoubleClick and self.angle != NoOppisite:
                 self.previous_angle = self.angle
             if string == 'up':
                 self.angle = UP

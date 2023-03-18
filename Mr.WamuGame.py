@@ -28,6 +28,7 @@ image = pygame.image.load("head.png").convert_alpha()
 apple_ticks = 0
 clock = pygame.time.Clock()
 Player1 = Player(320, 320)
+#Player2 = Player(384, 384)
 i = False 
 while running:
     #grid
@@ -39,6 +40,8 @@ while running:
 
 
     Player1.spawn_in()
+    #Player2.spawn_in()
+
 
     #print("hello")
 
@@ -61,6 +64,16 @@ while running:
                 Player1.turn(LEFT)
             elif event.key == pygame.K_d:
                 Player1.turn(RIGHT)
+            '''    
+            if event.key == pygame.K_i:
+                Player2.turn(UP)
+            elif event.key == pygame.K_k:
+                Player2.turn(DOWN)
+            elif event.key == pygame.K_j:
+                Player2.turn(LEFT)
+            elif event.key == pygame.K_l:
+                Player2.turn(RIGHT)
+            '''
             #player 2
             """
             if event.key == pygame.K_UP and j2 > 0:
