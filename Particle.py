@@ -64,8 +64,6 @@ class Particle:
         self.y -= math.cos(self.angle) * self.speed
 
     def movegrid(self):
-        print('x: ' + str(self.x))
-        print('y: ' + str(self.y))
         #up and down
         if (self.angle == UP or self.angle == DOWN) and self.x % 64 == 0:
             self.completed_path = True
